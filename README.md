@@ -36,7 +36,7 @@
      mkdir -p ~/code
      cd ~/code
      git clone https://github.com/mame2024/uppsala.git
-     cd uppsala
+     cd uppsala/users
      mkdir your-name
      cd your-name
      touch tasks.md
