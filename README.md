@@ -53,7 +53,3 @@
      git commit -m "Add my tasks file"
      git push
      ```
-
----
-
-Let me know if you want this added to the README or want to refine further!
