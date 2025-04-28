@@ -1,0 +1,163 @@
+/* Form container */
+.formContainer {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #fff;
+    border: 1px solid var(--color-border, #e2e2e2);
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Success and error messages */
+  .successMessage {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 4px;
+    border-left: 4px solid #155724;
+  }
+  
+  .errorMessage {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 4px;
+    border-left: 4px solid #721c24;
+  }
+  
+  /* Form elements */
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    width: 100%; /* Make the form take full width of container */
+  }
+  
+  .formGroup {
+    display: flex;
+    flex-direction: column;
+    width: 100%; /* Make each form group take full width */
+  }
+  
+  .label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-serif, Georgia, serif);
+    color: #333;
+  }
+  
+  .input, .textarea {
+    width: 100%; /* Make inputs take full width */
+    padding: 0.875rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: inherit;
+    background-color: #fcfcfc;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  
+  .input:focus, .textarea:focus {
+    outline: none;
+    border-color: #4a6741; /* Subtle green tint when focused */
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(74, 103, 65, 0.1);
+  }
+  
+  .textarea {
+    resize: vertical;
+    min-height: 120px; /* Taller textareas */
+  }
+  
+  /* Make the ingredients textarea taller */
+  #ingredients {
+    min-height: 150px;
+  }
+  
+  /* Make the instructions textarea even taller */
+  #instructions {
+    min-height: 200px;
+  }
+  
+  .errorText {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+  }
+  
+  /* Form actions */
+  .formActions {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  
+  /* Classic green submit button */
+  .submitButton {
+    background-color: #4a6741; /* Classic forest green */
+    color: white;
+    border: none;
+    padding: 0.9rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    letter-spacing: 0.5px;
+    flex-grow: 2; /* Make submit button larger */
+  }
+  
+  .submitButton:hover {
+    background-color: #3d5535; /* Darker on hover */
+  }
+  
+  .submitButton:disabled {
+    background-color: #a5b5a0;
+    cursor: not-allowed;
+  }
+  
+  /* Classic pink reset button */
+  .resetButton {
+    background-color: #fff;
+    color: #d68c91; /* Soft pink for text */
+    border: 1px solid #d68c91; /* Soft pink border */
+    padding: 0.9rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-grow: 1;
+  }
+  
+  .resetButton:hover {
+    background-color: #fdf5f5; /* Very light pink background on hover */
+    color: #c27078; /* Slightly darker pink text on hover */
+    border-color: #c27078;
+  }
+  
+  .resetButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .formContainer {
+      padding: 1.5rem;
+    }
+    
+    .formActions {
+      flex-direction: column;
+    }
+    
+    .submitButton, .resetButton {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1rem;
+    }
+  }

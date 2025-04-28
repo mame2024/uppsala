@@ -1,0 +1,147 @@
+/* Add to src/app/recipes/recipes.module.css */
+.debugSection {
+    margin-bottom: 2rem;
+    background: #f7f7f7;
+    padding: 1rem;
+    border-radius: 4px;
+  }
+  
+  .debugSection details {
+    cursor: pointer;
+  }
+  
+  .debugSection pre {
+    background: #333;
+    color: #fff;
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin-top: 1rem;
+  }
+  
+  .errorBox {
+    background-color: #fff8f8;
+    border: 1px solid #ffdede;
+    border-radius: 8px;
+    padding: 2rem;
+    margin: 2rem 0;
+  }
+  
+  .errorBox h2 {
+    color: #e53e3e;
+    margin-top: 0;
+  }
+  
+  .errorBox pre {
+    background: #f6f8fa;
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+  }
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+}
+
+.summary {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #666;
+  font-style: italic;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.card {
+  background-color: white;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card h2 {
+  font-size: 1.5rem;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.author {
+  color: #666;
+  font-style: italic;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.ingredients {
+  color: #444;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+  line-height: 1.5;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+.tag {
+  background-color: #f0f7ed;
+  color: #4a6741;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+}
+
+.empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  color: #666;
+}
+
+.newButton {
+  display: inline-block;
+  background-color: #4a6741;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  margin-bottom: 1rem;
+}
+
+.newButton:hover {
+  background-color: #3a5331;
+}

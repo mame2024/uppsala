@@ -1,0 +1,85 @@
+// src/app/recipes/page.tsx
+import React from 'react';
+import Link from 'next/link';
+import { createServerClient } from '@/lib/supabase/server';
+import styles from './recipes.module.css';
+
+export const dynamic = 'force-dynamic';
+
+async function RecipesPage() {
+  const supabase = createServerClient();
+  
+  try {
+    const { data: recipes, error } = await supabase
+      .from('recipes')
+      .select('*')
+      .order('created_at', { ascending: false });
+    
+    if (error) {
+      console.error('Error fetching recipes:', error);
+      return <div>Error loading recipes: {error.message}</div>;
+    }
+    
+    // Function to extract first few ingredients as a summary
+    const createIngredientsSummary = (ingredients) => {
+      if (!ingredients) return 'No ingredients listed';
+      
+      // Extract up to 3 ingredients
+      const lines = ingredients.split('\n')
+        .map(line => line.trim().replace(/^-\s*/, '')) // Remove bullet points
+        .filter(line => line);
+      
+      const mainItems = lines.slice(0, 3);
+      const extras = lines.length > 3 ? ` and ${lines.length - 3} more items` : '';
+      
+      return mainItems.join(', ') + extras;
+    };
+  
+    return (
+      <div className={styles.container}>
+        <h1 className={styles.title}>Flow Cookbook Recipes</h1>
+        
+        <div className={styles.summary}>
+          <p>{recipes.length} delicious recipes to choose from</p>
+        </div>
+        
+        <Link href="/recipes/new" className={styles.newButton}>
+          Add New Recipe
+        </Link>
+        
+        <div className={styles.grid}>
+          {recipes.length > 0 ? (
+            recipes.map((recipe) => (
+              <Link 
+                href={`/recipes/${recipe.id}`} 
+                key={recipe.id} 
+                className={styles.card}
+              >
+                <h2>{recipe.title}</h2>
+                <p className={styles.author}>By {recipe.author_name || 'Unknown'}</p>
+                
+                <p className={styles.ingredients}>
+                  {createIngredientsSummary(recipe.ingredients)}
+                </p>
+                
+                <div className={styles.tags}>
+                  {recipe.is_vegetarian && <span className={styles.tag}>Vegetarian</span>}
+                  {recipe.is_vegan && <span className={styles.tag}>Vegan</span>}
+                  {recipe.is_gluten_free && <span className={styles.tag}>Gluten Free</span>}
+                  {recipe.is_dairy_free && <span className={styles.tag}>Dairy Free</span>}
+                </div>
+              </Link>
+            ))
+          ) : (
+            <p className={styles.empty}>No recipes found. Add your first recipe!</p>
+          )}
+        </div>
+      </div>
+    );
+  } catch (error) {
+    console.error('Unexpected error:', error);
+    return <div>An unexpected error occurred</div>;
+  }
+}
+
+export default RecipesPage;
