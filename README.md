@@ -1,4 +1,4 @@
-# uppsala
+# Uppsala
 
 ## Pre-requisites
 
