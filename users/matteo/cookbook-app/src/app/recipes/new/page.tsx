@@ -1,4 +1,7 @@
+'use client';
+
 import RecipeForm from '@/components/recipes/RecipeForm';
+import supabase from '@/lib/supabase/client';
 
 export default function NewRecipePage() {
   return (

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import styles from './RecipeForm.module.css';
-import { createServerClient } from '@/lib/supabase/server';
+import supabase from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
 
 type FormData = {
@@ -32,7 +32,6 @@ export default function RecipeForm() {
     
     try {
       // Insert the recipe into Supabase
-      const supabase = createServerClient();
       const { data: recipe, error } = await supabase
         .from('recipes')
         .insert([{
