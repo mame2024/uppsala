@@ -1,4 +1,4 @@
-# uppsala
+# Uppsala
 
 ## Pre-requisites
 
@@ -36,7 +36,7 @@
      mkdir -p ~/code
      cd ~/code
      git clone https://github.com/mame2024/uppsala.git
-     cd uppsala
+     cd uppsala/users
      mkdir your-name
      cd your-name
      touch tasks.md
@@ -53,7 +53,3 @@
      git commit -m "Add my tasks file"
      git push
      ```
-
----
-
-Let me know if you want this added to the README or want to refine further!
