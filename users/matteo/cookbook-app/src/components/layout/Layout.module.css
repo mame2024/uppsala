@@ -16,7 +16,7 @@
   }
   
   /* Classic NYT-inspired default text styles */
-  :global(html) {
+  .html {
     --color-primary: #121212;
     --color-secondary: #666;
     --color-accent: #e63946;
@@ -36,7 +36,7 @@
   }
   
   /* Fix the global selectors by separating them */
-  :global(h1) {
+  .h1 {
     font-family: var(--font-serif);
     font-weight: 700;
     line-height: 1.2;
@@ -46,7 +46,7 @@
     padding-bottom: 0.5rem;
   }
   
-  :global(h2) {
+  .h2 {
     font-family: var(--font-serif);
     font-weight: 700;
     line-height: 1.2;
@@ -54,14 +54,14 @@
     font-size: 1.75rem;
   }
   
-  :global(h3), :global(h4), :global(h5) {
+  .h3, .h4, .h5 {
     font-family: var(--font-serif);
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 0.75rem;
   }
   
-  :global(p) {
+  .p {
     font-family: var(--font-sans);
     line-height: 1.6;
     margin-bottom: 1.5rem;
