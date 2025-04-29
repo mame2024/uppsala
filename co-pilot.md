@@ -15,6 +15,8 @@ The app should:
 - Maintain a file named `tasks.md` to track tasks.
 - The `tasks.md` file must be located inside `./users/matteo/tasks.md`.
 - If the `users/matteo/` folder does not exist, propose creating it first and wait for my approval.
+- Update the tasks.md file automatically when tasks are completed without asking for permission first.
+- After updating tasks.md, inform me what changes were made and confirm these changes before moving to the next task.
 
 **For Each Task:**
 - Clearly define the task (short and precise).
@@ -31,7 +33,8 @@ The app should:
    - Describe the action.
    - Describe the verification.
    - Wait for me to confirm completion.
-   - Update `tasks.md` as tasks are completed.
+   - Update `tasks.md` automatically when I indicate a task is complete.
+   - Inform me of the updates made to tasks.md and confirm them.
 4. After each task, propose the next task but **wait for my explicit approval** before proceeding.
 
 **Important Constraints:**
