@@ -12,6 +12,8 @@ export default function RecipeDetailsPage() {
   const [recipe, setRecipe] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
 
   useEffect(() => {
     async function fetchRecipe() {
@@ -51,6 +53,35 @@ export default function RecipeDetailsPage() {
     return instructions.split('\n').map((step, index) => (
       <li key={index}>{step.trim().replace(/^\d+\.\s*/, '')}</li>
     ));
+  };
+
+  const handleDeleteClick = () => {
+    setShowDeleteConfirm(true);
+  };
+
+  const handleCancelDelete = () => {
+    setShowDeleteConfirm(false);
+  };
+
+  const handleConfirmDelete = async () => {
+    setDeleteLoading(true);
+    try {
+      const { error } = await supabase
+        .from('recipes')
+        .delete()
+        .eq('id', params.id);
+      
+      if (error) throw error;
+      
+      // Redirect to recipes list after successful deletion
+      router.push('/recipes');
+    } catch (err) {
+      console.error('Error deleting recipe:', err);
+      setError(err.message);
+      setShowDeleteConfirm(false);
+    } finally {
+      setDeleteLoading(false);
+    }
   };
 
   if (loading) return (
@@ -93,13 +124,49 @@ export default function RecipeDetailsPage() {
           ← Back to Recipes
         </button>
         
-        <Link 
-          href={`/recipes/edit/${recipe.id}`} 
-          className={styles.editButton}
-        >
-          Edit Recipe
-        </Link>
+        <div className={styles.rightButtons}>
+          <Link 
+            href={`/recipes/edit/${recipe.id}`} 
+            className={styles.editButton}
+          >
+            Edit Recipe
+          </Link>
+          
+          <button 
+            onClick={handleDeleteClick} 
+            className={styles.deleteButton}
+          >
+            Delete Recipe
+          </button>
+        </div>
       </div>
+
+      {showDeleteConfirm && (
+        <div className={styles.confirmOverlay}>
+          <div className={styles.confirmBox}>
+            <h3>Delete Recipe</h3>
+            <p>Are you sure you want to delete "{recipe.title}"?</p>
+            <p className={styles.confirmWarning}>This action cannot be undone.</p>
+            
+            <div className={styles.confirmButtons}>
+              <button 
+                onClick={handleCancelDelete} 
+                className={styles.cancelDeleteButton}
+                disabled={deleteLoading}
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={handleConfirmDelete} 
+                className={styles.confirmDeleteButton}
+                disabled={deleteLoading}
+              >
+                {deleteLoading ? 'Deleting...' : 'Delete Recipe'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <article className={styles.recipe}>
         <h1 className={styles.title}>{recipe.title}</h1>
@@ -113,6 +180,8 @@ export default function RecipeDetailsPage() {
           {recipe.is_vegan && <span className={styles.tag}>Vegan</span>}
           {recipe.is_gluten_free && <span className={styles.tag}>Gluten Free</span>}
           {recipe.is_dairy_free && <span className={styles.tag}>Dairy Free</span>}
+          {recipe.is_low_sodium && <span className={styles.tag}>Low Sodium</span>}
+          {recipe.is_low_calorie && <span className={styles.tag}>Low Calorie</span>}
         </div>
 
         <div className={styles.section}>
