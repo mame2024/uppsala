@@ -11,6 +11,12 @@ type FormData = {
   ingredients: string;
   instructions: string;
   author_name: string;
+  is_vegetarian: boolean;
+  is_vegan: boolean;
+  is_gluten_free: boolean;
+  is_dairy_free: boolean;
+  is_low_sodium: boolean;
+  is_low_calorie: boolean;
 };
 
 export default function RecipeForm() {
@@ -24,11 +30,29 @@ export default function RecipeForm() {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<FormData>();
+    watch,
+  } = useForm<FormData>({
+    defaultValues: {
+      is_vegetarian: false,
+      is_vegan: false,
+      is_gluten_free: false,
+      is_dairy_free: false,
+      is_low_sodium: false,
+      is_low_calorie: false,
+    }
+  });
+
+  // Watch the vegan value to automatically check vegetarian if vegan is checked
+  const isVegan = watch('is_vegan');
 
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
     setSubmitError(null);
+    
+    // If recipe is vegan, it's also vegetarian
+    if (data.is_vegan) {
+      data.is_vegetarian = true;
+    }
     
     try {
       // Insert the recipe into Supabase
@@ -39,6 +63,12 @@ export default function RecipeForm() {
           ingredients: data.ingredients,
           instructions: data.instructions,
           author_name: data.author_name,
+          is_vegetarian: data.is_vegetarian,
+          is_vegan: data.is_vegan,
+          is_gluten_free: data.is_gluten_free,
+          is_dairy_free: data.is_dairy_free,
+          is_low_sodium: data.is_low_sodium,
+          is_low_calorie: data.is_low_calorie,
         }])
         .select();
       
@@ -154,6 +184,72 @@ export default function RecipeForm() {
           {errors.author_name && (
             <span className={styles.errorText}>{errors.author_name.message}</span>
           )}
+        </div>
+
+        <div className={styles.formGroup}>
+          <label className={styles.label}>Dietary Information</label>
+          <div className={styles.checkboxContainer}>
+            <div className={styles.checkboxGroup}>
+              <label className={styles.checkboxLabel}>
+                <input 
+                  type="checkbox" 
+                  {...register('is_vegetarian')}
+                  disabled={isVegan} // Disable if vegan is checked (it will be auto-checked)
+                  className={styles.checkbox}
+                />
+                Vegetarian
+              </label>
+
+              <label className={styles.checkboxLabel}>
+                <input 
+                  type="checkbox" 
+                  {...register('is_vegan')} 
+                  className={styles.checkbox}
+                />
+                Vegan
+              </label>
+            </div>
+
+            <div className={styles.checkboxGroup}>
+              <label className={styles.checkboxLabel}>
+                <input 
+                  type="checkbox" 
+                  {...register('is_gluten_free')} 
+                  className={styles.checkbox}
+                />
+                Gluten Free
+              </label>
+
+              <label className={styles.checkboxLabel}>
+                <input 
+                  type="checkbox" 
+                  {...register('is_dairy_free')} 
+                  className={styles.checkbox}
+                />
+                Dairy Free
+              </label>
+            </div>
+
+            <div className={styles.checkboxGroup}>
+              <label className={styles.checkboxLabel}>
+                <input 
+                  type="checkbox" 
+                  {...register('is_low_sodium')} 
+                  className={styles.checkbox}
+                />
+                Low Sodium
+              </label>
+
+              <label className={styles.checkboxLabel}>
+                <input 
+                  type="checkbox" 
+                  {...register('is_low_calorie')} 
+                  className={styles.checkbox}
+                />
+                Low Calorie
+              </label>
+            </div>
+          </div>
         </div>
 
         <div className={styles.formActions}>
