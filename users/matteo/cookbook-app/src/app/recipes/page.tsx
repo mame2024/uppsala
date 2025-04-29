@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import supabase from '@/lib/supabase/client';
 import styles from './recipes.module.css';
+import { format } from 'date-fns';
 
 export const dynamic = 'force-dynamic';
 
@@ -71,7 +72,16 @@ export default function RecipesPage() {
               className={styles.card}
             >
               <h2>{recipe.title}</h2>
-              <p className={styles.author}>By {recipe.author_name || 'Unknown'}</p>
+              
+              <div className={styles.cardMeta}>
+                <p className={styles.author}>By {recipe.author_name || 'Unknown'}</p>
+                
+                {recipe.created_at && (
+                  <p className={styles.date}>
+                    {format(new Date(recipe.created_at), 'MMM d, yyyy')}
+                  </p>
+                )}
+              </div>
               
               <p className={styles.ingredients}>
                 {createIngredientsSummary(recipe.ingredients)}

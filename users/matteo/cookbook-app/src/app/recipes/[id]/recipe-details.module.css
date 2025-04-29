@@ -222,3 +222,19 @@
   opacity: 0.6;
   cursor: not-allowed;
 }
+
+.date {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.meta {
+  color: #666;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.author, .date {
+  display: inline-block;
+}

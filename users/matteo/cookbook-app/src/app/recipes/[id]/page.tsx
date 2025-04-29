@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import supabase from '@/lib/supabase/client';
 import styles from './recipe-details.module.css';
+import { format } from 'date-fns';
 
 export default function RecipeDetailsPage() {
   const params = useParams();
@@ -173,6 +174,12 @@ export default function RecipeDetailsPage() {
         
         {recipe.author_name && (
           <p className={styles.author}>By {recipe.author_name}</p>
+        )}
+        
+        {recipe.created_at && (
+          <p className={styles.date}>
+            Added on {format(new Date(recipe.created_at), 'MMMM d, yyyy')}
+          </p>
         )}
 
         <div className={styles.tags}>

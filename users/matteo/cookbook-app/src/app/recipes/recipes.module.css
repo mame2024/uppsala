@@ -92,11 +92,23 @@
   color: #333;
 }
 
+.cardMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.date {
+  color: #666;
+  font-size: 0.8rem;
+}
+
 .author {
   color: #666;
   font-style: italic;
-  margin-bottom: 1rem;
   font-size: 0.9rem;
+  margin: 0;
 }
 
 .ingredients {
